@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width" />
+    <title>CRUD</title>
+  </head>
+  <h1>Listagem de Usuários</h1>
+  <p><a href="/inserir.html">INSERIR NOVO USUÁRIO</a></p>
+
+  <script>
+    const url = '/pessoas';
+  
+    fetch(url)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        let pessoas = data;
+        let saida = '';
+        pessoas.map(function(pessoa) {
+          saida += '<strong> '+ `${pessoa.nome_pessoa}` + '</strong> ' + `${pessoa.cargo}`;
+          saida += ' - <a href="/atualizar.html?id_pessoa=' + `${pessoa.id_pessoa}` + '">EDITAR</a>';
+          saida += ' | <a href="/removePessoa?id_pessoa='+`${pessoa.id_pessoa}`+'">REMOVER</a></br>';
+        });
+        document.getElementById('resultado').innerHTML = saida;
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+      
+
+  </script>
+
+  <body>
+    <div id="resultado"></div>
+    <br><br>
+    <p>
+      Outros endpoints de leitura(R do CRUD):
+      <a href="./contatos">Contatos, </a>
+      <a href="./formacoes">Formação, </a>
+      <a href="./experiencias">Experiências, </a>
+      <a href="./habilidades">Habilidades, </a>
+      <a href="./notas">Notas das habilidades</a> e 
+      <a href="./realizacoes">Realizações.</a>
+    </p>
+  </body>
+</html>
