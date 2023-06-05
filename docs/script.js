@@ -4,12 +4,18 @@ $("#imgPerfil").on({
     mouseleave:()=>{$("body").css("background-color", "white")}
 })
 
-$("#btnPerfil").click(()=>{
-    let ajaxTeste = new XMLHttpRequest();
-    ajaxTeste.onreadystatechange = ()=>{
+var btnPerfil = document.getElementById("btnPerfil");
+
+btnPerfil.addEventListener('click', teste);
+
+function teste(){
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function(){
         document.getElementById("nome").innerHTML = this.responseText;
     }
 
-    ajaxTeste.open("GET", "caminhoDaImg.txt", true);
-    ajaxTeste.send();
-})
+    xhttp.open('GET', 'file.txt', true);
+    xhttp.send();
+
+    console.log("testando")
+}
